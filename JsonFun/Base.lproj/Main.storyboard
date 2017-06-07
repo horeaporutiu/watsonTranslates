@@ -51,7 +51,7 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="NcG-rb-n7Z"/>
                                 </connections>
                             </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3KP-pb-AEc">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3KP-pb-AEc">
                                 <rect key="frame" x="16" y="303" width="165" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -80,7 +80,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0X-dK-mJq">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0X-dK-mJq">
                                 <rect key="frame" x="200" y="303" width="165" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -94,6 +94,7 @@
                         <outlet property="label" destination="C8o-Gc-Qtx" id="8Of-xW-mNt"/>
                         <outlet property="pickerLabel" destination="3KP-pb-AEc" id="tdU-G5-KYt"/>
                         <outlet property="pickerView" destination="5ba-d9-TOy" id="3xo-Pf-X0i"/>
+                        <outlet property="pickerView2" destination="kle-En-bOn" id="aBa-z5-N35"/>
                         <outlet property="text" destination="ELn-5g-qXS" id="6iN-Wu-l4D"/>
                         <outlet property="translateToLabel" destination="W0X-dK-mJq" id="CE2-eh-Idp"/>
                     </connections>

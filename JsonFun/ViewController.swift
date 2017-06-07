@@ -11,6 +11,7 @@ import Foundation
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    @IBOutlet weak var pickerView2: UIPickerView!
     @IBOutlet weak var pickerLabel: UILabel!
     
     @IBOutlet weak var text: UITextField!
@@ -21,10 +22,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBOutlet weak var translateToLabel: UILabel!
     
+    //TODO: map languages to correct two letter abrev
+    var sourceLanguages = [ "Arabic", "English", "Portuguese", "French", "Spanish"]
     
-    let sourceLanguages = [ "Arabic", "Brazilian", "Portuguese", "French", "German", "Italian", "Spanish"]
-    
-    let targetLanguages = ["Arabic", "Brazilian", "Portuguese", "French", "German", "Italian", "Spanish"]
+    var targetLanguages = ["English"]
     
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -32,25 +33,78 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return sourceLanguages[row]
+        if pickerView.tag == 1 {
+            switch row{
+            case 0:
+                targetLanguages = ["English"]
+            case 1:
+                targetLanguages = ["Arabic", "Portuguese", "French", "Spanish"]
+            case 2:
+                targetLanguages = ["English"]
+            case 3:
+                targetLanguages = ["English"]
+            case 4:
+                targetLanguages = ["English"]
+            default:
+                print("error")
+            }
+            self.pickerView2.reloadAllComponents()
+            return sourceLanguages[row]
+        }
+        
+        return targetLanguages[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return sourceLanguages.count
+        if pickerView.tag == 1 {
+            return sourceLanguages.count
+        }
+        else {
+            if self.sourceLanguages[2] == "English" {
+                print("@@@@@@@@@@@@@@@@@@@@@@@@@")
+                return 4;
+            }
+            else {
+                return targetLanguages.count
+            }
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        if pickerView.tag == 1 {
-            pickerLabel.text = sourceLanguages[row]
-        }
-        if pickerView.tag == 2 {
-            translateToLabel.text = targetLanguages[row]
+        DispatchQueue.main.async() {
+            
+            if pickerView.tag == 1 {
+                let lang: String = self.sourceLanguages[row]
+                switch lang {
+                case "Arabic":
+                    self.pickerLabel.text = "ar"
+                    self.translateToLabel.text = "en"
+                case "English":
+                    self.pickerLabel.text = "en"
+                    self.targetLanguages = ["Arabic", "Portuguese", "French", "Spanish"]
+                    pickerView.reloadAllComponents()
+                case "Portuguese":
+                    self.pickerLabel.text = "pt"
+                    self.translateToLabel.text = "en"
+                case "French":
+                    self.pickerLabel.text = "fr"
+                    self.translateToLabel.text = "en"
+                case "Spanish":
+                    self.pickerLabel.text = "es"
+                    self.translateToLabel.text = "en"
+                default:
+                    print("Error")
+                }
+                //self.pickerLabel.text = self.sourceLanguages[row]
+            }
+            if pickerView.tag == 2 {
+                self.translateToLabel.text = self.targetLanguages[row]
+            }
+            self.pickerLabel.isHidden = true
+            self.translateToLabel.isHidden = true
+
         }
     }
-    
-    
-    
     
     @IBAction func onPostTapped(_ sender: Any) {
         
@@ -58,8 +112,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
          print(text.text ?? "")
         let someStr : String = text.text ?? ""
         let parameters = [
-            "source": "en",
-            "target": "es",
+            "source": self.pickerLabel.text,
+            "target": self.translateToLabel.text,
             "text": someStr]
         
         guard let url = URL(string: "https://watson-api-explorer.mybluemix.net/language-translator/api/v2/translate") else {return}
@@ -90,14 +144,13 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                             //make sure label gets updated instantly
                             DispatchQueue.main.async() {
                                 //update label
-                                self.label.text = finalStr                            }
+                                self.label.text = finalStr
+                            }
                         }
                     }
-                    
-                    
+                                        
                 }
                 catch {
-                    print("opsdfdfs")
                     print(error)
                 }
             }

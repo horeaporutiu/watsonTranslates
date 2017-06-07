@@ -160,12 +160,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     
-    
-
     override func viewDidLoad() {
        
-        
-        
     }
 
     override func didReceiveMemoryWarning() {

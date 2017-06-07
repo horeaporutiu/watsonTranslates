@@ -9,18 +9,55 @@
 import UIKit
 import Foundation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    @IBOutlet weak var pickerLabel: UILabel!
     
     @IBOutlet weak var text: UITextField!
     
     @IBOutlet weak var label: UILabel!
+    
+    @IBOutlet weak var pickerView: UIPickerView!
+    
+    @IBOutlet weak var translateToLabel: UILabel!
+    
+    
+    let sourceLanguages = [ "Arabic", "Brazilian", "Portuguese", "French", "German", "Italian", "Spanish"]
+    
+    let targetLanguages = ["Arabic", "Brazilian", "Portuguese", "French", "German", "Italian", "Spanish"]
+    
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return sourceLanguages[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return sourceLanguages.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        if pickerView.tag == 1 {
+            pickerLabel.text = sourceLanguages[row]
+        }
+        if pickerView.tag == 2 {
+            translateToLabel.text = targetLanguages[row]
+        }
+    }
+    
+    
+    
     
     @IBAction func onPostTapped(_ sender: Any) {
         
         print("*********************************************")
          print(text.text ?? "")
         let someStr : String = text.text ?? ""
-        let parameters = ["model_id": "en-es",
+        let parameters = [
             "source": "en",
             "target": "es",
             "text": someStr]

@@ -10,28 +10,28 @@ import Foundation
 
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    
+
     @IBOutlet weak var pickerView2: UIPickerView!
     @IBOutlet weak var pickerLabel: UILabel!
-    
+
     @IBOutlet weak var text: UITextField!
-    
+
     @IBOutlet weak var label: UILabel!
-    
+
     @IBOutlet weak var pickerView: UIPickerView!
-    
+
     @IBOutlet weak var translateToLabel: UILabel!
-    
+
     //TODO: map languages to correct two letter abrev
     var sourceLanguages = [ "Arabic", "English", "Portuguese", "French", "Spanish"]
-    
+
     var targetLanguages = ["English"]
-    
-    
+
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView.tag == 1 {
             switch row{
@@ -51,10 +51,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             self.pickerView2.reloadAllComponents()
             return sourceLanguages[row]
         }
-        
+
         return targetLanguages[row]
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView.tag == 1 {
             return sourceLanguages.count
@@ -68,10 +68,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             }
         }
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         DispatchQueue.main.async() {
-            
+
             if pickerView.tag == 1 {
                 let lang: String = self.sourceLanguages[row]
                 switch lang {
@@ -100,12 +100,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             }
             self.pickerLabel.isHidden = true
             self.translateToLabel.isHidden = true
-            
+
         }
     }
-    
+
     @IBAction func onPostTapped(_ sender: Any) {
-        
+
         let someStr : String = text.text ?? ""
         let parameters = [
             "source": self.pickerLabel.text,
@@ -125,18 +125,19 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 //output the translated Text
                 self.label.text = returnData!
             }
-            }.resume()
+
+        }.resume()
         
     }
-    
+
     override func viewDidLoad() {
-        
+
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
+
+
 }

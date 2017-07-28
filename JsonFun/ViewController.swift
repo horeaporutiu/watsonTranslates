@@ -10,28 +10,24 @@ import Foundation
 
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-
+    
     @IBOutlet weak var pickerView2: UIPickerView!
     @IBOutlet weak var pickerLabel: UILabel!
-
     @IBOutlet weak var text: UITextField!
-
     @IBOutlet weak var label: UILabel!
-
     @IBOutlet weak var pickerView: UIPickerView!
-
     @IBOutlet weak var translateToLabel: UILabel!
-
+    
     //TODO: map languages to correct two letter abrev
     var sourceLanguages = [ "Arabic", "English", "Portuguese", "French", "Spanish"]
-
+    
     var targetLanguages = ["English"]
-
-
+    
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView.tag == 1 {
             switch row{
@@ -51,10 +47,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             self.pickerView2.reloadAllComponents()
             return sourceLanguages[row]
         }
-
+        
         return targetLanguages[row]
     }
-
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView.tag == 1 {
             return sourceLanguages.count
@@ -68,10 +64,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             }
         }
     }
-
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         DispatchQueue.main.async() {
-
+            //Watson translates from English to Arabic,Port,French,Span, but not the other way
             if pickerView.tag == 1 {
                 let lang: String = self.sourceLanguages[row]
                 switch lang {
@@ -100,44 +96,90 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             }
             self.pickerLabel.isHidden = true
             self.translateToLabel.isHidden = true
-
         }
     }
-
+    
+    func customActivityIndicatory(_ viewContainer: UIView, startAnimate:Bool? = true) -> UIActivityIndicatorView {
+        let mainContainer: UIView = UIView(frame: viewContainer.frame)
+        mainContainer.center = viewContainer.center
+        mainContainer.alpha = 1
+        mainContainer.tag = 789456123
+        mainContainer.isUserInteractionEnabled = false
+        
+        let viewBackgroundLoading: UIView = UIView(frame: CGRect(x:0,y: 0,width: 80,height: 80))
+        viewBackgroundLoading.center = viewContainer.center
+        viewBackgroundLoading.alpha = 1
+        viewBackgroundLoading.clipsToBounds = true
+        viewBackgroundLoading.layer.cornerRadius = 15
+        
+        let activityIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView()
+        activityIndicatorView.frame = CGRect(x:0.0,y: 0.0,width: 40.0, height: 40.0)
+        activityIndicatorView.activityIndicatorViewStyle =
+            UIActivityIndicatorViewStyle.whiteLarge
+        activityIndicatorView.center = CGPoint(x: viewBackgroundLoading.frame.size.width / 2, y: viewBackgroundLoading.frame.size.height / 1.5)
+        if startAnimate!{
+            viewBackgroundLoading.addSubview(activityIndicatorView)
+            mainContainer.addSubview(viewBackgroundLoading)
+            viewContainer.addSubview(mainContainer)
+            activityIndicatorView.startAnimating()
+        }else{
+            for subview in viewContainer.subviews{
+                if subview.tag == 789456123{
+                    subview.removeFromSuperview()
+                }
+            }
+        }
+        return activityIndicatorView
+    }
+    
     @IBAction func onPostTapped(_ sender: Any) {
-
-        let someStr : String = text.text ?? ""
+        customActivityIndicatory(self.view, startAnimate: true)
+        //get the text from the text field
+        var someStr : String = text.text ?? ""
+        if (someStr.characters.count <= 0) {
+            someStr = "You need to enter something to translate!"
+        }
+        
+        //populate HTTP Body
         let parameters = [
             "source": self.pickerLabel.text,
             "target": self.translateToLabel.text,
             "text": someStr
         ]
-        guard let url = URL(string: "http://localhost:8080/translates") else {return}
-        var request = URLRequest(url: url)
+        
+        //OpenWhisk Web Action URL
+        let OWurl = URL(string: "https://openwhisk.ng.bluemix.net/api/v1/web/Developer%20Advocate_dev/demo1/test")
+        
+        //pass url we want to make request to
+        var request = URLRequest(url: OWurl!)
         request.httpMethod = "POST"
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {return}
+        
+        //convert JSON into JSON data
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {print("else");return}
+        
         request.httpBody = httpBody
+        //ensure server knows that we will pass in json
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             let returnData = String(data: data!, encoding: .utf8) //data to String
             DispatchQueue.main.async() {
                 //output the translated Text
                 self.label.text = returnData!
+                self.customActivityIndicatory(self.view, startAnimate: false)
             }
-
-        }.resume()
-        
+            }.resume()
     }
-
+    
     override func viewDidLoad() {
-
+        self.automaticallyAdjustsScrollViewInsets = false;
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }

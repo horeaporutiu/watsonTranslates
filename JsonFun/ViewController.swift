@@ -7,7 +7,7 @@
 //
 import UIKit
 import Foundation
-
+//import SpeechToTextV1
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -102,21 +102,18 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     func customActivityIndicatory(_ viewContainer: UIView, startAnimate:Bool? = true) -> UIActivityIndicatorView {
         let mainContainer: UIView = UIView(frame: viewContainer.frame)
         mainContainer.center = viewContainer.center
-        mainContainer.alpha = 1
         mainContainer.tag = 789456123
         mainContainer.isUserInteractionEnabled = false
         
         let viewBackgroundLoading: UIView = UIView(frame: CGRect(x:0,y: 0,width: 80,height: 80))
         viewBackgroundLoading.center = viewContainer.center
-        viewBackgroundLoading.alpha = 1
-        viewBackgroundLoading.clipsToBounds = true
         viewBackgroundLoading.layer.cornerRadius = 15
         
         let activityIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView()
         activityIndicatorView.frame = CGRect(x:0.0,y: 0.0,width: 40.0, height: 40.0)
         activityIndicatorView.activityIndicatorViewStyle =
             UIActivityIndicatorViewStyle.whiteLarge
-        activityIndicatorView.center = CGPoint(x: viewBackgroundLoading.frame.size.width / 2, y: viewBackgroundLoading.frame.size.height / 1.5)
+        activityIndicatorView.center = CGPoint(x: viewBackgroundLoading.frame.size.width / 2, y: viewBackgroundLoading.frame.size.height / 0.7)
         if startAnimate!{
             viewBackgroundLoading.addSubview(activityIndicatorView)
             mainContainer.addSubview(viewBackgroundLoading)
@@ -132,8 +129,37 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return activityIndicatorView
     }
     
+    
+    @IBAction func record(_ sender: Any) {
+//        print("sdf")
+//        let username = "2998293c-d7a3-434f-a47d-d2d3a7fe57d1"
+//        let password = "n6vVDj5mnA2A"
+//        let speechToText = SpeechToText(username: username, password: password)
+//        
+//        func startStreaming() {
+//            var settings = RecognitionSettings(contentType: .wav)
+//            settings.interimResults = true
+//            let failure = { (error: Error) in print(error) }
+//            speechToText.recognizeMicrophone(settings: settings, failure: failure) { results in
+//                print(results.bestTranscript)
+//            }
+//        }
+//        
+//        func stopStreaming() {
+//            speechToText.stopRecognizeMicrophone()
+//        }
+    }
+    
     @IBAction func onPostTapped(_ sender: Any) {
+        label.text = ""
+        let loader = customActivityIndicatory(self.view, startAnimate: false)
+        label.layer.zPosition = 3
+        loader.layer.zPosition = 1
         customActivityIndicatory(self.view, startAnimate: true)
+
+        
+        
+        
         //get the text from the text field
         var someStr : String = text.text ?? ""
         if (someStr.characters.count <= 0) {
@@ -166,10 +192,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             let returnData = String(data: data!, encoding: .utf8) //data to String
             DispatchQueue.main.async() {
                 //output the translated Text
+                self.label.isHidden = false
                 self.label.text = returnData!
                 self.customActivityIndicatory(self.view, startAnimate: false)
             }
-            }.resume()
+        }.resume()
     }
     
     override func viewDidLoad() {

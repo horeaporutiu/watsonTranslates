@@ -7,7 +7,7 @@
 //
 import UIKit
 import Foundation
-//import SpeechToTextV1
+import SpeechToTextV1
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -113,7 +113,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         activityIndicatorView.frame = CGRect(x:0.0,y: 0.0,width: 40.0, height: 40.0)
         activityIndicatorView.activityIndicatorViewStyle =
             UIActivityIndicatorViewStyle.whiteLarge
-        activityIndicatorView.center = CGPoint(x: viewBackgroundLoading.frame.size.width / 2, y: viewBackgroundLoading.frame.size.height / 0.7)
+        activityIndicatorView.center = CGPoint(x: viewBackgroundLoading.frame.size.width / 2, y: viewBackgroundLoading.frame.size.height / 0.8)
         if startAnimate!{
             viewBackgroundLoading.addSubview(activityIndicatorView)
             mainContainer.addSubview(viewBackgroundLoading)
@@ -131,23 +131,26 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     @IBAction func record(_ sender: Any) {
-//        print("sdf")
-//        let username = "2998293c-d7a3-434f-a47d-d2d3a7fe57d1"
-//        let password = "n6vVDj5mnA2A"
-//        let speechToText = SpeechToText(username: username, password: password)
-//        
-//        func startStreaming() {
-//            var settings = RecognitionSettings(contentType: .wav)
-//            settings.interimResults = true
-//            let failure = { (error: Error) in print(error) }
-//            speechToText.recognizeMicrophone(settings: settings, failure: failure) { results in
-//                print(results.bestTranscript)
-//            }
-//        }
-//        
-//        func stopStreaming() {
-//            speechToText.stopRecognizeMicrophone()
-//        }
+        text.text = ""
+        let username = "2998293c-d7a3-434f-a47d-d2d3a7fe57d1"
+        let password = "n6vVDj5mnA2A"
+        let speechToText = SpeechToText(username: username, password: password)
+        
+        var settings = RecognitionSettings(contentType: .opus)
+        settings.interimResults = true
+        let failure = { (error: Error) in print(error) }
+        speechToText.recognizeMicrophone(settings: settings, failure: failure) { results in
+                print("poonation")
+                print(results)
+                self.text.text = (results.bestTranscript)
+                print(failure)
+                for result in results.results {
+                    if result.final {
+                    // stop transcribing microphone audio
+                        speechToText.stopRecognizeMicrophone()
+                    }
+                }
+            }
     }
     
     @IBAction func onPostTapped(_ sender: Any) {

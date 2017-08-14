@@ -20,6 +20,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var translateToLabel: UILabel!
     
+    let passwordManager = ViewController1()
     //TODO: map languages to correct two letter abrev
     var sourceLanguages = [ "Arabic", "English", "Portuguese", "French", "Spanish"]
     
@@ -135,8 +136,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBAction func record(_ sender: Any) {
         text.text = ""
         //your SpeechToText service credentials
-        let username = "username"
-        let password = "password"
+        let username = passwordManager.STTUsername
+        let password = passwordManager.STTPassword
         let speechToText = SpeechToText(username: username, password: password)
         
         var settings = RecognitionSettings(contentType: .opus)
@@ -157,11 +158,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
 
     var audioPlayer = AVAudioPlayer() // see note below
-
     @IBAction func pronounceTouch(_ sender: Any) {
-
-        let username = "03f2282e-db10-4f97-aae5-591ef9c0aa11"
-        let password = "XSoXnuFrkbKg"
+        var username = passwordManager.TTSUsername
+        var password = passwordManager.TTSPassword
         let textToSpeech = TextToSpeech(username: username, password: password)
         let textToPronounce = self.label.text
         var voiceToPlay = SynthesisVoice.es_Enrique

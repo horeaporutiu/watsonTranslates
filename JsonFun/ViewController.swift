@@ -8,6 +8,8 @@
 import UIKit
 import Foundation
 import SpeechToTextV1
+import TextToSpeechV1
+import AVFoundation
 
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -113,7 +115,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         activityIndicatorView.frame = CGRect(x:0.0,y: 0.0,width: 40.0, height: 40.0)
         activityIndicatorView.activityIndicatorViewStyle =
             UIActivityIndicatorViewStyle.whiteLarge
-        activityIndicatorView.center = CGPoint(x: viewBackgroundLoading.frame.size.width / 2, y: viewBackgroundLoading.frame.size.height / 0.8)
+        activityIndicatorView.center = CGPoint(x: viewBackgroundLoading.frame.size.width / 2, y: viewBackgroundLoading.frame.size.height / 1.16)
         if startAnimate!{
             viewBackgroundLoading.addSubview(activityIndicatorView)
             mainContainer.addSubview(viewBackgroundLoading)
@@ -152,6 +154,47 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 }
             }
     }
+
+    var audioPlayer = AVAudioPlayer() // see note below
+
+    @IBAction func pronounceTouch(_ sender: Any) {
+
+        let username = "03f2282e-db10-4f97-aae5-591ef9c0aa11"
+        let password = "XSoXnuFrkbKg"
+        let textToSpeech = TextToSpeech(username: username, password: password)
+        let textToPronounce = self.label.text
+        var voiceToPlay = SynthesisVoice.es_Enrique
+        let targetLang = self.translateToLabel.text!
+        print(targetLang)
+
+        switch targetLang {
+            case "en":
+                voiceToPlay = SynthesisVoice(rawValue: SynthesisVoice.us_Michael.rawValue)!
+            case "Portuguese":
+                voiceToPlay = SynthesisVoice(rawValue: SynthesisVoice.br_Isabela.rawValue)!
+            case "French":
+                voiceToPlay = SynthesisVoice(rawValue: SynthesisVoice.fr_Renee.rawValue)!
+            case "Spanish":
+                voiceToPlay = SynthesisVoice(rawValue: SynthesisVoice.es_Enrique.rawValue)!
+            default:
+                voiceToPlay = SynthesisVoice(rawValue: SynthesisVoice.es_Enrique.rawValue)!
+            }
+
+        
+        let failure = { (error: Error) in print(error) }
+        print(failure)
+        textToSpeech.synthesize(textToPronounce!,voice: voiceToPlay.rawValue, failure: failure) { data in
+            self.audioPlayer = try! AVAudioPlayer(data: data)
+            self.audioPlayer.prepareToPlay()
+            print("prepare to play")
+            print(self.audioPlayer)
+            self.audioPlayer.play()
+
+        }
+
+        
+    }
+    
     
     @IBAction func onPostTapped(_ sender: Any) {
         label.text = ""
@@ -160,8 +203,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         loader.layer.zPosition = 1
         customActivityIndicatory(self.view, startAnimate: true)
 
-        
-        
         
         //get the text from the text field
         var someStr : String = text.text ?? ""
@@ -177,7 +218,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         ]
         
         //OpenWhisk Web Action URL
-        let OWurl = URL(string: "https://openwhisk.ng.bluemix.net/api/v1/web/Developer%20Advocate_dev/demo1/test")
+        //guard let kituraUrl = URL(string: "http://localhost:8080/translates") else {return}
+        let OWurl = URL(string: "https://openwhisk.ng.bluemix.net/api/v1/web/Developer%20Advocate_dev/demo1/translate")
+        
+        //let bluemixURL = URL(string: "https://getstartednode-inductionless-gamone.mybluemix.net/")
         
         //pass url we want to make request to
         var request = URLRequest(url: OWurl!)

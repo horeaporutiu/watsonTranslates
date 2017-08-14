@@ -13,6 +13,8 @@
 		835D880C1EE7135200FAA010 /* JsonFun.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 835D880A1EE7135200FAA010 /* JsonFun.xcdatamodeld */; };
 		835D880E1EE7135200FAA010 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 835D880D1EE7135200FAA010 /* Assets.xcassets */; };
 		835D88111EE7135200FAA010 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 835D880F1EE7135200FAA010 /* LaunchScreen.storyboard */; };
+		83EB755F1F3E580E003D06B1 /* TextToSpeechV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83EB755E1F3E580E003D06B1 /* TextToSpeechV1.framework */; };
+		83EB75601F3E580E003D06B1 /* TextToSpeechV1.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83EB755E1F3E580E003D06B1 /* TextToSpeechV1.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83FF3F221F3CD041004CA68C /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FF3F201F3CD041004CA68C /* RestKit.framework */; };
 		83FF3F231F3CD041004CA68C /* RestKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83FF3F201F3CD041004CA68C /* RestKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83FF3F241F3CD041004CA68C /* SpeechToTextV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FF3F211F3CD041004CA68C /* SpeechToTextV1.framework */; };
@@ -26,6 +28,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				83EB75601F3E580E003D06B1 /* TextToSpeechV1.framework in Embed Frameworks */,
 				83FF3F231F3CD041004CA68C /* RestKit.framework in Embed Frameworks */,
 				83FF3F251F3CD041004CA68C /* SpeechToTextV1.framework in Embed Frameworks */,
 			);
@@ -43,6 +46,7 @@
 		835D880D1EE7135200FAA010 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		835D88101EE7135200FAA010 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		835D88121EE7135200FAA010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83EB755E1F3E580E003D06B1 /* TextToSpeechV1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TextToSpeechV1.framework; path = Carthage/Build/iOS/TextToSpeechV1.framework; sourceTree = "<group>"; };
 		83FF3F201F3CD041004CA68C /* RestKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RestKit.framework; path = Carthage/Build/iOS/RestKit.framework; sourceTree = "<group>"; };
 		83FF3F211F3CD041004CA68C /* SpeechToTextV1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpeechToTextV1.framework; path = Carthage/Build/iOS/SpeechToTextV1.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83EB755F1F3E580E003D06B1 /* TextToSpeechV1.framework in Frameworks */,
 				83FF3F221F3CD041004CA68C /* RestKit.framework in Frameworks */,
 				83FF3F241F3CD041004CA68C /* SpeechToTextV1.framework in Frameworks */,
 			);
@@ -63,6 +68,7 @@
 		835D87F71EE7135200FAA010 = {
 			isa = PBXGroup;
 			children = (
+				83EB755E1F3E580E003D06B1 /* TextToSpeechV1.framework */,
 				83FF3F201F3CD041004CA68C /* RestKit.framework */,
 				83FF3F211F3CD041004CA68C /* SpeechToTextV1.framework */,
 				835D88021EE7135200FAA010 /* JsonFun */,

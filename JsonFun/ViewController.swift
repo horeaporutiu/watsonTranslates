@@ -134,8 +134,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBAction func record(_ sender: Any) {
         text.text = ""
-        let username = "2998293c-d7a3-434f-a47d-d2d3a7fe57d1"
-        let password = "n6vVDj5mnA2A"
+        //your SpeechToText service credentials
+        let username = "username"
+        let password = "password"
         let speechToText = SpeechToText(username: username, password: password)
         
         var settings = RecognitionSettings(contentType: .opus)

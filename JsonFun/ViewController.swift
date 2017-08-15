@@ -159,8 +159,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 
     var audioPlayer = AVAudioPlayer() // see note below
     @IBAction func pronounceTouch(_ sender: Any) {
-        var username = passwordManager.TTSUsername
-        var password = passwordManager.TTSPassword
+        let username = passwordManager.TTSUsername
+        let password = passwordManager.TTSPassword
         let textToSpeech = TextToSpeech(username: username, password: password)
         let textToPronounce = self.label.text
         var voiceToPlay = SynthesisVoice.es_Enrique
@@ -219,12 +219,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         //OpenWhisk Web Action URL
         //guard let kituraUrl = URL(string: "http://localhost:8080/translates") else {return}
-        let OWurl = URL(string: "https://openwhisk.ng.bluemix.net/api/v1/web/Developer%20Advocate_dev/demo1/translate")
+        //let OWurl = URL(string: "https://openwhisk.ng.bluemix.net/api/v1/web/Developer%20Advocate_dev/demo1/translate")
         
-        //let bluemixURL = URL(string: "https://getstartednode-inductionless-gamone.mybluemix.net/")
+        let bluemixURL = URL(string: "https://getstartednode-inductionless-gamone.mybluemix.net/translates")
         
         //pass url we want to make request to
-        var request = URLRequest(url: OWurl!)
+        var request = URLRequest(url: bluemixURL!)
         request.httpMethod = "POST"
         
         //convert JSON into JSON data

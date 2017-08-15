@@ -7,8 +7,13 @@
 //
 
 import Foundation
+import UIKit
 
-var STTUsername =
-var STTPassword =
-var TTSUsername =
-var STTPassword =
+class ViewController1: UIViewController {
+    
+    var STTUsername = "2998293c-d7a3-434f-a47d-d2d3a7fe57d1"
+    var STTPassword = "n6vVDj5mnA2A"
+    var TTSUsername = "03f2282e-db10-4f97-aae5-591ef9c0aa11"
+    var TTSPassword = "XSoXnuFrkbKg"
+
+}

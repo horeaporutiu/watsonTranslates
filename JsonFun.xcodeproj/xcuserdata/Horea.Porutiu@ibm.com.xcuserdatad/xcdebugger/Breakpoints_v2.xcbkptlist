@@ -2,4 +2,54 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JsonFun/ViewController.swift"
+            timestampString = "526341717.416735"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "JsonFun.ViewController.(viewDidLoad () -&gt; ()).(closure #1)"
+                  moduleName = "JsonFun"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Horea.Porutiu@ibm.com/Workdir/Swift/ClientSide/JsonFun/JsonFun/ViewController.swift"
+                  timestampString = "525998922.917654"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "322"
+                  endingLineNumber = "322"
+                  offsetFromSymbolStart = "1510">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "JsonFun.ViewController.(viewDidLoad () -&gt; ()).(closure #1)"
+                  moduleName = "JsonFun"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Horea.Porutiu@ibm.com/Workdir/Swift/ClientSide/JsonFun/JsonFun/ViewController.swift"
+                  timestampString = "525998922.920885"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "322"
+                  endingLineNumber = "322"
+                  offsetFromSymbolStart = "1992">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

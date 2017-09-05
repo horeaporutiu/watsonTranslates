@@ -19,13 +19,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var translateToLabel: UILabel!
-    
+    @IBOutlet weak var topPhrases: UILabel!
+    @IBOutlet weak var toneLabel: UILabel!
     let passwordManager = ViewController1()
-    //TODO: map languages to correct two letter abrev
+    
     var sourceLanguages = [ "Arabic", "English", "Portuguese", "French", "Spanish"]
-    
     var targetLanguages = ["English"]
-    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -132,7 +131,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return activityIndicatorView
     }
     
-    
     @IBAction func record(_ sender: Any) {
         text.text = ""
         //your SpeechToText service credentials
@@ -144,7 +142,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         settings.interimResults = true
         let failure = { (error: Error) in print(error) }
         speechToText.recognizeMicrophone(settings: settings, failure: failure) { results in
-                print("poonation")
                 print(results)
                 self.text.text = (results.bestTranscript)
                 print(failure)
@@ -157,7 +154,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             }
     }
 
-    var audioPlayer = AVAudioPlayer() // see note below
+    var audioPlayer = AVAudioPlayer()
     @IBAction func pronounceTouch(_ sender: Any) {
         let username = passwordManager.TTSUsername
         let password = passwordManager.TTSPassword
@@ -189,10 +186,54 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             print("prepare to play")
             print(self.audioPlayer)
             self.audioPlayer.play()
-
         }
-
+    }
+    
+    func toneAnalyzer(toneData: String){
+        let parameters = ["text": toneData]
+        //OpenWhisk Web Action URL
+        let OWurl = URL(string: "https://openwhisk.ng.bluemix.net/api/v1/web/Developer%20Advocate_dev/demo1/toneAnalyzer")
+        var request = URLRequest(url: OWurl!)
+        request.httpMethod = "POST"
         
+        //convert JSON into JSON data
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {print("else");return}
+        
+        request.httpBody = httpBody
+        //ensure server knows that we will pass in json
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            do {
+                let returnData = String(data: data!, encoding: .utf8) //data to String
+                print("toneAnalyzer returnData2: ")
+                print(returnData!)
+                if data != nil {
+                    let json = try JSONSerialization.jsonObject(with: data!) as? [String: Any]
+                    let docTone = json?["document_tone"] as! [String:Any]
+
+                    let toneCategories = docTone["tone_categories"] as! [[String:AnyObject]]
+                    self.toneLabel.text = "Your Tone \n \n"
+                    DispatchQueue.main.async() {
+                        for key in toneCategories {
+                            if (key["tones"] != nil) {
+                                let tonesArray = key["tones"] as! [[String:AnyObject]]
+                                for key in tonesArray {
+                                    if (key["score"] != nil) {
+                                        let score = key["score"] as! Double
+                                        if (score > 0.5){
+                                            self.toneLabel.text = (self.toneLabel.text)! + (key["tone_name"] as! String) + ", Score: \(score) \n";
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch {
+                print("Error deserializing JSON: \(error)")
+            }
+            }.resume()
     }
     
     
@@ -217,14 +258,15 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             "text": someStr
         ]
         
-        //OpenWhisk Web Action URL
-        //guard let kituraUrl = URL(string: "http://localhost:8080/translates") else {return}
-        //let OWurl = URL(string: "https://openwhisk.ng.bluemix.net/api/v1/web/Developer%20Advocate_dev/demo1/translate")
         
-        let bluemixURL = URL(string: "https://getstartednode-inductionless-gamone.mybluemix.net/translates")
+        //OpenWhisk Web Action URL
+        guard let kituraUrl = URL(string: "http://localhost:8080/translates") else {return}
+        let OWurl = URL(string: "https://openwhisk.ng.bluemix.net/api/v1/web/Developer%20Advocate_dev/demo1/translate")
+        
+        //let bluemixURL = URL(string: "https://getstartednode-inductionless-gamone.mybluemix.net/translates")
         
         //pass url we want to make request to
-        var request = URLRequest(url: bluemixURL!)
+        var request = URLRequest(url: kituraUrl)
         request.httpMethod = "POST"
         
         //convert JSON into JSON data
@@ -236,18 +278,54 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
-            let returnData = String(data: data!, encoding: .utf8) //data to String
-            DispatchQueue.main.async() {
-                //output the translated Text
-                self.label.isHidden = false
-                self.label.text = returnData!
-                self.customActivityIndicatory(self.view, startAnimate: false)
+            if data != nil {
+                let returnData = String(data: data!, encoding: .utf8)
+                DispatchQueue.main.async() {
+                    //output the translated Text
+                    self.label.isHidden = false
+                    self.label.text = returnData
+                    self.toneAnalyzer(toneData: parameters["text"]!!)
+                    self.customActivityIndicatory(self.view, startAnimate: false)
+                }
+            }
+            else {
+                print("Invalid Data")
             }
         }.resume()
     }
     
     override func viewDidLoad() {
+        
         self.automaticallyAdjustsScrollViewInsets = false;
+        
+        let OWurl = URL(string: "https://openwhisk.ng.bluemix.net/api/v1/web/Developer%20Advocate_dev/demo1/getPopularPhrases")
+        var request = URLRequest(url: OWurl!)
+        request.httpMethod = "GET"
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            do {
+                if data != nil {
+                    let json = try JSONSerialization.jsonObject(with: data!) as? [String: Any]
+                    let index = json?["index"] as! [String:Any]
+                    
+                    let phrases = index["phrases"] as! [[String:AnyObject]]
+                    var i = 0;
+                    DispatchQueue.main.async() {
+                        self.topPhrases.text = "Popular Phrases \n \n"
+                        for event in phrases {
+                            if(i==5){break}
+                            print(event["phrase"] as! String)
+                            self.topPhrases.text = (self.topPhrases.text)! + (event["phrase"] as? String)! + "\n"
+                            i=i+1;
+                        }
+                    }
+                }
+
+            } catch {
+                print("Error deserializing JSON: \(error)")
+            }
+            }.resume()
+
     }
     
     override func didReceiveMemoryWarning() {

@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8304B7F01F63552D00B356B0 /* ActivityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8304B7EF1F63552D00B356B0 /* ActivityMonitor.swift */; };
+		8304B7F21F63649F00B356B0 /* Watson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8304B7F11F63649F00B356B0 /* Watson.swift */; };
 		835D88041EE7135200FAA010 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D88031EE7135200FAA010 /* AppDelegate.swift */; };
-		835D88061EE7135200FAA010 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D88051EE7135200FAA010 /* ViewController.swift */; };
+		835D88061EE7135200FAA010 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D88051EE7135200FAA010 /* HomeController.swift */; };
 		835D88091EE7135200FAA010 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 835D88071EE7135200FAA010 /* Main.storyboard */; };
 		835D880C1EE7135200FAA010 /* JsonFun.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 835D880A1EE7135200FAA010 /* JsonFun.xcdatamodeld */; };
 		835D880E1EE7135200FAA010 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 835D880D1EE7135200FAA010 /* Assets.xcassets */; };
 		835D88111EE7135200FAA010 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 835D880F1EE7135200FAA010 /* LaunchScreen.storyboard */; };
-		836BD2D51F4262BF00ADBBF2 /* ViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836BD2D41F4262BF00ADBBF2 /* ViewController1.swift */; };
+		836BD2D51F4262BF00ADBBF2 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836BD2D41F4262BF00ADBBF2 /* Credentials.swift */; };
 		83EB755F1F3E580E003D06B1 /* TextToSpeechV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83EB755E1F3E580E003D06B1 /* TextToSpeechV1.framework */; };
 		83EB75601F3E580E003D06B1 /* TextToSpeechV1.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83EB755E1F3E580E003D06B1 /* TextToSpeechV1.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83FF3F221F3CD041004CA68C /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83FF3F201F3CD041004CA68C /* RestKit.framework */; };
@@ -39,15 +41,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8304B7EF1F63552D00B356B0 /* ActivityMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityMonitor.swift; sourceTree = "<group>"; };
+		8304B7F11F63649F00B356B0 /* Watson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Watson.swift; sourceTree = "<group>"; };
 		835D88001EE7135200FAA010 /* JsonFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JsonFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		835D88031EE7135200FAA010 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		835D88051EE7135200FAA010 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		835D88051EE7135200FAA010 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		835D88081EE7135200FAA010 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		835D880B1EE7135200FAA010 /* JsonFun.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JsonFun.xcdatamodel; sourceTree = "<group>"; };
 		835D880D1EE7135200FAA010 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		835D88101EE7135200FAA010 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		835D88121EE7135200FAA010 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		836BD2D41F4262BF00ADBBF2 /* ViewController1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController1.swift; sourceTree = "<group>"; };
+		836BD2D41F4262BF00ADBBF2 /* Credentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		83EB755E1F3E580E003D06B1 /* TextToSpeechV1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TextToSpeechV1.framework; path = Carthage/Build/iOS/TextToSpeechV1.framework; sourceTree = "<group>"; };
 		83FF3F201F3CD041004CA68C /* RestKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RestKit.framework; path = Carthage/Build/iOS/RestKit.framework; sourceTree = "<group>"; };
 		83FF3F211F3CD041004CA68C /* SpeechToTextV1.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpeechToTextV1.framework; path = Carthage/Build/iOS/SpeechToTextV1.framework; sourceTree = "<group>"; };
@@ -67,6 +71,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8304B7F31F63669000B356B0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				836BD2D41F4262BF00ADBBF2 /* Credentials.swift */,
+				8304B7F11F63649F00B356B0 /* Watson.swift */,
+				835D88031EE7135200FAA010 /* AppDelegate.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		8304B7F41F63669700B356B0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8304B7EF1F63552D00B356B0 /* ActivityMonitor.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		8304B7F51F63669D00B356B0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				835D88051EE7135200FAA010 /* HomeController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		835D87F71EE7135200FAA010 = {
 			isa = PBXGroup;
 			children = (
@@ -89,14 +119,14 @@
 		835D88021EE7135200FAA010 /* JsonFun */ = {
 			isa = PBXGroup;
 			children = (
-				835D88031EE7135200FAA010 /* AppDelegate.swift */,
-				835D88051EE7135200FAA010 /* ViewController.swift */,
-				835D88071EE7135200FAA010 /* Main.storyboard */,
+				8304B7F51F63669D00B356B0 /* Controller */,
+				8304B7F41F63669700B356B0 /* View */,
+				8304B7F31F63669000B356B0 /* Model */,
 				835D880D1EE7135200FAA010 /* Assets.xcassets */,
+				835D88071EE7135200FAA010 /* Main.storyboard */,
 				835D880F1EE7135200FAA010 /* LaunchScreen.storyboard */,
 				835D88121EE7135200FAA010 /* Info.plist */,
 				835D880A1EE7135200FAA010 /* JsonFun.xcdatamodeld */,
-				836BD2D41F4262BF00ADBBF2 /* ViewController1.swift */,
 			);
 			path = JsonFun;
 			sourceTree = "<group>";
@@ -194,9 +224,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				835D880C1EE7135200FAA010 /* JsonFun.xcdatamodeld in Sources */,
-				836BD2D51F4262BF00ADBBF2 /* ViewController1.swift in Sources */,
-				835D88061EE7135200FAA010 /* ViewController.swift in Sources */,
+				8304B7F21F63649F00B356B0 /* Watson.swift in Sources */,
+				836BD2D51F4262BF00ADBBF2 /* Credentials.swift in Sources */,
+				835D88061EE7135200FAA010 /* HomeController.swift in Sources */,
 				835D88041EE7135200FAA010 /* AppDelegate.swift in Sources */,
+				8304B7F01F63552D00B356B0 /* ActivityMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

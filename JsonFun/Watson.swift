@@ -13,12 +13,9 @@ import SpeechToTextV1
 import AVFoundation
 
 class Watson: UIViewController {
-    
-//    let homeView = ViewController()
-    
+
     let credentials = Credentials()
     let activityLoader = ActivityMonitor()
-
     var audioPlayer = AVAudioPlayer()
     
     func proTouch(_ sender: Any, oneLabel: UILabel, targetLabel: UILabel) {
@@ -28,7 +25,6 @@ class Watson: UIViewController {
         let textToPronounce = oneLabel.text
         var voiceToPlay = SynthesisVoice.es_Enrique
         let targetLang = targetLabel.text!
-        print(targetLang)
         
         switch targetLang {
         case "en":
@@ -42,7 +38,6 @@ class Watson: UIViewController {
         default:
             voiceToPlay = SynthesisVoice(rawValue: SynthesisVoice.es_Enrique.rawValue)!
         }
-        
         
         let failure = { (error: Error) in print(error) }
         print(failure)
@@ -126,28 +121,29 @@ class Watson: UIViewController {
             }.resume()
     }
     
-    func translate (text: UITextField, label: UILabel, parameters: [String:String?], toneLabel: UILabel, homeView: UIView ) {
-        print("hjisdf")
-        label.text = ""
-        let loader = activityLoader.customActivityIndicatory(homeView, startAnimate: false)
-        label.layer.zPosition = 3
-        loader.layer.zPosition = 1
-        self.activityLoader.customActivityIndicatory(homeView, startAnimate: true)
+    func translate (text: UITextField, label: UILabel, toneLabel: UILabel, homeView: UIView, pickerLabel: UILabel, translateToLabel: UILabel) {
         
-        
-        //get the text from the text field
         var someStr : String = text.text ?? ""
         if (someStr.characters.count <= 0) {
             someStr = "You need to enter something to translate!"
         }
         
         //populate HTTP Body
-        let parameters = parameters
-        
+        let parameters = [
+            "source": pickerLabel.text,
+            "target": translateToLabel.text,
+            "text": someStr
+        ]
+
+        label.text = ""
+        let loader = activityLoader.customActivityIndicatory(homeView, startAnimate: false)
+        label.layer.zPosition = 3
+        loader.layer.zPosition = 1
+        self.activityLoader.customActivityIndicatory(homeView, startAnimate: true)
+
         //OpenWhisk Web Action URL
         guard let kituraUrl = URL(string: "http://localhost:8080/translates") else {return}
         let OWurl = URL(string: "https://openwhisk.ng.bluemix.net/api/v1/web/Developer%20Advocate_dev/demo1/translate")
-        
         //let bluemixURL = URL(string: "https://getstartednode-inductionless-gamone.mybluemix.net/translates")
         
         //pass url we want to make request to

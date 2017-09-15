@@ -38,7 +38,7 @@
                                     <color key="titleShadowColor" red="0.38513480739130501" green="0.83206831398619996" blue="0.022894965277777776" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="onPostTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5kO-ST-vvn"/>
+                                    <action selector="translate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5kO-ST-vvn"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Hello!" borderStyle="roundedRect" placeholder="Tap to type something" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ELn-5g-qXS">
@@ -106,7 +106,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="pronounceTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wrb-Nm-EVl"/>
+                                    <action selector="pronounce:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wrb-Nm-EVl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hj7-cq-7P1">

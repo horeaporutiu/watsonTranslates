@@ -8,9 +8,7 @@
 
 import Foundation
 import UIKit
-import TextToSpeechV1
 import AVFoundation
-
 
 class ActivityMonitor: UIViewController {
     let credentials = Credentials()
@@ -29,7 +27,7 @@ class ActivityMonitor: UIViewController {
         activityIndicatorView.frame = CGRect(x:0.0,y: 0.0,width: 40.0, height: 40.0)
         activityIndicatorView.activityIndicatorViewStyle =
             UIActivityIndicatorViewStyle.whiteLarge
-        activityIndicatorView.center = CGPoint(x: viewBackgroundLoading.frame.size.width / 2, y: viewBackgroundLoading.frame.size.height / 1.16)
+        activityIndicatorView.center = CGPoint(x: viewBackgroundLoading.frame.size.width / 2, y: viewBackgroundLoading.frame.size.height / 0.8)
         if startAnimate!{
             viewBackgroundLoading.addSubview(activityIndicatorView)
             mainContainer.addSubview(viewBackgroundLoading)

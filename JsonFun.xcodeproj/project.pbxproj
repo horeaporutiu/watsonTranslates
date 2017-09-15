@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8304B7F01F63552D00B356B0 /* ActivityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8304B7EF1F63552D00B356B0 /* ActivityMonitor.swift */; };
 		8304B7F21F63649F00B356B0 /* Watson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8304B7F11F63649F00B356B0 /* Watson.swift */; };
+		8304B7F71F649EF900B356B0 /* Cloudant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8304B7F61F649EF900B356B0 /* Cloudant.swift */; };
 		835D88041EE7135200FAA010 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D88031EE7135200FAA010 /* AppDelegate.swift */; };
 		835D88061EE7135200FAA010 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D88051EE7135200FAA010 /* HomeController.swift */; };
 		835D88091EE7135200FAA010 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 835D88071EE7135200FAA010 /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		8304B7EF1F63552D00B356B0 /* ActivityMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityMonitor.swift; sourceTree = "<group>"; };
 		8304B7F11F63649F00B356B0 /* Watson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Watson.swift; sourceTree = "<group>"; };
+		8304B7F61F649EF900B356B0 /* Cloudant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cloudant.swift; sourceTree = "<group>"; };
 		835D88001EE7135200FAA010 /* JsonFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JsonFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		835D88031EE7135200FAA010 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		835D88051EE7135200FAA010 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				836BD2D41F4262BF00ADBBF2 /* Credentials.swift */,
 				8304B7F11F63649F00B356B0 /* Watson.swift */,
 				835D88031EE7135200FAA010 /* AppDelegate.swift */,
+				8304B7F61F649EF900B356B0 /* Cloudant.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				835D880C1EE7135200FAA010 /* JsonFun.xcdatamodeld in Sources */,
+				8304B7F71F649EF900B356B0 /* Cloudant.swift in Sources */,
 				8304B7F21F63649F00B356B0 /* Watson.swift in Sources */,
 				836BD2D51F4262BF00ADBBF2 /* Credentials.swift in Sources */,
 				835D88061EE7135200FAA010 /* HomeController.swift in Sources */,
